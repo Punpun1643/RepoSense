@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
   loading-overlay.overlay-loader(
-    v-bind:active='isLoadingOverlayEnabled',
+    v-bind:active='$store.state.loadingOverlayCount > 0',
     v-bind:opacity='loadingOverlayOpacity'
   )
     template(v-slot:default)
@@ -95,7 +95,6 @@ const app = {
       users: [],
       userUpdated: false,
 
-      isLoadingOverlayEnabled: false,
       loadingOverlayOpacity: 1,
 
       tabType: 'empty',
@@ -113,11 +112,6 @@ const app = {
     },
     '$store.state.tabAuthorshipInfo': function () {
       this.activateTab('authorship');
-    },
-    '$store.state.loadingOverlayCount': function () {
-      this.$nextTick(() => {
-        this.isLoadingOverlayEnabled = this.$store.state.loadingOverlayCount > 0;
-      });
     },
   },
   methods: {
