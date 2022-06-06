@@ -140,6 +140,7 @@ const app = {
       this.$store.commit('incrementLoadingOverlayCount', 1);
       this.$store.commit('updateLoadingOverlayMessage', loadingResourcesMessage);
       this.userUpdated = false;
+      await window.browserRerender();
       try {
         const {
           creationDate,
