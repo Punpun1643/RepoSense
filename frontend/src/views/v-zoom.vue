@@ -94,9 +94,11 @@
       v-bind:class="{ 'message-body active': slice.messageBody !== '' }"
     )
       a.message-title(v-bind:href="getSliceLink(slice)", target="_blank")
-        .within-border {{ slice.messageTitle.substr(0, 50) }}
-        .not-within-border(v-if="slice.messageTitle.length > 50")
-          |{{ slice.messageTitle.substr(50) }}
+        .tooltip
+          .within-border {{ slice.messageTitle.substr(0, 50) }}
+          .not-within-border(v-if="slice.messageTitle.length > 50")
+            |{{ slice.messageTitle.substr(50) }}
+          span.tooltip-text Click to view the detailed file changes in the commit
       span &nbsp; ({{ slice.insertions }} lines) &nbsp;
       .hash
         span {{ slice.hash.substr(0, 7) }}
