@@ -713,7 +713,7 @@ export default {
         @include medium-font;
         margin-top: 1.25rem;
         padding: .5rem 1.0rem .25rem 1.0rem;
-        width: 30%;
+        width: 80%;
       }
 
       #submit-button {
