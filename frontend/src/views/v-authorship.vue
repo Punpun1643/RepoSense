@@ -36,19 +36,12 @@
             option(v-bind:value='false') Ascending
           label order
       .searchbox
-        input.radio-button--search(
-          type="radio",
-          value="search",
-          v-model="filterType",
-          v-on:change="indicateSearchBar(); updateSearchBarValue();"
-        )
         .mui-form--inline
           input#search(
             type="search",
             placeholder="Filter by glob",
             ref="searchBar",
             v-bind:value="searchBarValue",
-            v-on:focus="indicateSearchBar",
             v-on:keyup.enter="updateSearchBarValue"
           )
           button#submit-button(
@@ -56,12 +49,6 @@
             v-on:click="indicateSearchBar(); updateSearchBarValue();"
           ) Filter
       .fileTypes
-        input.radio-button--checkbox(
-          type="radio",
-          value="checkboxes",
-          v-model="filterType",
-          v-on:change="indicateCheckBoxes"
-        )
         .checkboxes.mui-form--inline(v-if="files.length > 0")
           label(style='background-color: #000000; color: #ffffff')
             input.mui-checkbox--fileType#all(type="checkbox", v-model="isSelectAllChecked")
