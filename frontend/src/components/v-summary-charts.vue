@@ -3,7 +3,7 @@
   .summary-charts(v-for="(repo, i) in filteredRepos")
     .summary-charts__title(
       v-if="filterGroupSelection !== 'groupByNone'",
-      v-bind:class="{ 'active-background': \
+      v-bind:class="{ 'active-user': \
         isSelectedGroup(repo[0].name, repo[0].repoName) }"
     )
       .summary-charts__title--index {{ i+1 }}
@@ -89,8 +89,7 @@
     .summary-chart(v-for="(user, j) in repo")
       .summary-chart__title(
         v-if="!isGroupMerged(getGroupName(repo))",
-        v-bind:class="{ 'active-background': user.name === activeUser && user.repoName === activeRepo, \
-         'active-name': user.name === activeUser && user.repoName === activeRepo }"
+        v-bind:class="{ 'active-user': user.name === activeUser && user.repoName === activeRepo }"
       )
         .summary-chart__title--index {{ j+1 }}
         .summary-chart__title--repo(v-if="filterGroupSelection === 'groupByNone'") {{ user.repoName }}

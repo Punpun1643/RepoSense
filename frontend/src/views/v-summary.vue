@@ -1066,12 +1066,10 @@ export default {
     color: mui-color('white');
   }
 
-  .active-background {
+  .active-user {
     background-color: mui-color('yellow', '200');
+    color: mui-color('green', '800');
   }
 
-  .active-name {
-    color: mui-color('green', '200');
-  }
 }
 </style>
