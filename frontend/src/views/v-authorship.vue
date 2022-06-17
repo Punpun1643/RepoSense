@@ -49,12 +49,6 @@
             v-on:click="indicateSearchBar(); updateSearchBarValue();"
           ) Filter
       .fileTypes
-        input.radio-button--checkbox(
-          type="radio",
-          value="checkboxes",
-          v-model="filterType",
-          v-on:change="indicateCheckBoxes"
-        )
         .checkboxes.mui-form--inline(v-if="files.length > 0")
           label(style='background-color: #000000; color: #ffffff')
             input.mui-checkbox--fileType#all(type="checkbox", v-model="isSelectAllChecked")
