@@ -36,19 +36,12 @@
             option(v-bind:value='false') Ascending
           label order
       .searchbox
-        input.radio-button--search(
-          type="radio",
-          value="search",
-          v-model="filterType",
-          v-on:change="indicateSearchBar(); updateSearchBarValue();"
-        )
         .mui-form--inline
           input#search(
             type="search",
             placeholder="Filter by glob",
             ref="searchBar",
             v-bind:value="searchBarValue",
-            v-on:focus="indicateSearchBar",
             v-on:keyup.enter="updateSearchBarValue"
           )
           button#submit-button(
