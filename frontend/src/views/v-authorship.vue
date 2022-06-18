@@ -36,11 +36,6 @@
             option(v-bind:value='false') Ascending
           label order
       .searchbox
-        //- input.radio-button--search(
-        //-   type="radio",
-        //-   value="search",
-        //-   v-on:change="indicateSearchBar(); updateSearchBarValue();"
-        //- )
         .mui-form--inline
           input#search(
             type="search",
@@ -59,11 +54,6 @@
         v-on:click="resetFilter"
       ) Reset filter
       .fileTypes
-        //- input.radio-button--checkbox(
-        //-   type="radio",
-        //-   value="checkboxes",
-        //-   v-on:change="indicateCheckBoxes"
-        //- )
         .checkboxes.mui-form--inline(v-if="files.length > 0")
           label(style='background-color: #000000; color: #ffffff')
             .tooltip
@@ -178,7 +168,6 @@ function authorshipInitialState() {
     isLoaded: false,
     files: [],
     selectedFiles: [],
-    // filterType: 'checkboxes',
     selectedFileTypes: [],
     fileTypes: [],
     filesLinesObj: {},
