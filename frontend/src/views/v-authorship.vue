@@ -62,11 +62,13 @@
         //- )
         .checkboxes.mui-form--inline(v-if="files.length > 0")
           label(style='background-color: #000000; color: #ffffff')
-            input.mui-checkbox--fileType#all(type="checkbox", v-model="isSelectAllChecked")
-            span(v-bind:title="getTotalFileBlankLineInfo()")
-              span All&nbsp;
-              span {{ totalLineCount }}&nbsp;
-              span ({{ totalLineCount - totalBlankLineCount }})&nbsp;
+            .tooltip
+              input#all.mui-checkbox--fileType(type='checkbox', v-model='isSelectAllChecked')
+              span(v-bind:title='getTotalFileBlankLineInfo()')
+                span All&nbsp;
+                span {{ totalLineCount }}&nbsp;
+                span ({{ totalLineCount - totalBlankLineCount }})&nbsp;
+              span.tooltip-text {{ isSelectAllChecked ? 'Uncheck' : 'Check' }} to view all file types
           template(v-for="fileType in Object.keys(fileTypeLinesObj)", v-bind:key="fileType")
             label(
               v-bind:style="{\
