@@ -551,15 +551,11 @@ export default {
     },
 
     indicateSearchBar() {
-      // this.selectedFileTypes = this.fileTypes.slice();
       this.isBinaryFilesChecked = true;
       this.isIgnoredFilesChecked = true;
-      // this.filterType = 'search';
     },
 
     indicateCheckBoxes() {
-      // this.searchBarValue = '';
-      // this.filterType = 'checkboxes';
       this.updateFileTypeHash();
     },
 
