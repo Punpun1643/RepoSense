@@ -708,6 +708,10 @@ export default {
         margin: 0 2.0rem 0 0;
         vertical-align: middle;
       }
+      .mui-form--inline {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
       #search {
         @include medium-font;
