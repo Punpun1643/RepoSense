@@ -54,6 +54,10 @@
             type="button",
             v-on:click="indicateSearchBar(); updateSearchBarValue();"
           ) Filter
+      button#reset-button(
+        type="button"
+        v-on:click="resetFilter"
+      ) Reset filter
       .fileTypes
         //- input.radio-button--checkbox(
         //-   type="radio",
@@ -568,6 +572,11 @@ export default {
       // this.searchBarValue = '';
       // this.filterType = 'checkboxes';
       this.updateFileTypeHash();
+    },
+
+    resetFilter() {
+      this.resetSelectedFileTypes();
+      this.searchBarValue = '';
     },
 
     getHistoryLink(file) {
