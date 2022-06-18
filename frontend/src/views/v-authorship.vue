@@ -36,12 +36,6 @@
             option(v-bind:value='false') Ascending
           label order
       .searchbox
-        input.radio-button--search(
-          type="radio",
-          value="search",
-          v-model="filterType",
-          v-on:change="indicateSearchBar(); updateSearchBarValue();"
-        )
         .mui-form--inline
           input#search(
             type="search",
@@ -55,20 +49,20 @@
             type="button",
             v-on:click="indicateSearchBar(); updateSearchBarValue();"
           ) Filter
+      button#reset-button(
+        type="button"
+        v-on:click="resetFilter"
+      ) Reset filter
       .fileTypes
-        input.radio-button--checkbox(
-          type="radio",
-          value="checkboxes",
-          v-model="filterType",
-          v-on:change="indicateCheckBoxes"
-        )
         .checkboxes.mui-form--inline(v-if="files.length > 0")
           label(style='background-color: #000000; color: #ffffff')
-            input.mui-checkbox--fileType#all(type="checkbox", v-model="isSelectAllChecked")
-            span(v-bind:title="getTotalFileBlankLineInfo()")
-              span All&nbsp;
-              span {{ totalLineCount }}&nbsp;
-              span ({{ totalLineCount - totalBlankLineCount }})&nbsp;
+            .tooltip
+              input#all.mui-checkbox--fileType(type='checkbox', v-model='isSelectAllChecked')
+              span(v-bind:title='getTotalFileBlankLineInfo()')
+                span All&nbsp;
+                span {{ totalLineCount }}&nbsp;
+                span ({{ totalLineCount - totalBlankLineCount }})&nbsp;
+              span.tooltip-text {{ isSelectAllChecked ? 'Uncheck' : 'Check' }} to view all file types
           template(v-for="fileType in Object.keys(fileTypeLinesObj)", v-bind:key="fileType")
             label(
               v-bind:style="{\
@@ -76,12 +70,17 @@
                 'color': getFontColor(fileTypeColors[fileType])\
                 }"
             )
-              input.mui-checkbox--fileType(type="checkbox",
-                v-bind:id="fileType", v-bind:value="fileType",
-                v-on:change="indicateCheckBoxes", v-model="selectedFileTypes")
-              span(v-bind:title="getFileTypeBlankLineInfo(fileType)")
-                span {{ fileType }}&nbsp;{{ fileTypeLinesObj[fileType] }}&nbsp;
-                span ({{ fileTypeLinesObj[fileType] - fileTypeBlankLinesObj[fileType] }})&nbsp;
+              .tooltip
+                input.mui-checkbox--fileType(type="checkbox",
+                  v-bind:id="fileType", v-bind:value="fileType",
+                  v-on:change="indicateCheckBoxes", v-model="selectedFileTypes")
+                span(v-bind:title="getFileTypeBlankLineInfo(fileType)")
+                  span {{ fileType }}&nbsp;{{ fileTypeLinesObj[fileType] }}&nbsp;
+                  span ({{ fileTypeLinesObj[fileType] - fileTypeBlankLinesObj[fileType] }})&nbsp;
+                span.tooltip-text(v-if="isFileTypeSelected(fileType)")
+                  span Uncheck to exclude {{ fileType }} file(s)
+                span.tooltip-text(v-else)
+                  span Check to include {{ fileType }} file(s)
           br
           label.binary-fileType(v-if="binaryFilesCount > 0")
             input.mui-checkbox--fileType(type="checkbox", v-model="isBinaryChecked")
@@ -169,7 +168,6 @@ function authorshipInitialState() {
     isLoaded: false,
     files: [],
     selectedFiles: [],
-    filterType: 'checkboxes',
     selectedFileTypes: [],
     fileTypes: [],
     filesLinesObj: {},
@@ -548,17 +546,22 @@ export default {
       this.$store.commit('incrementLoadingOverlayCount', -1);
     },
 
+    isFileTypeSelected(fileType) {
+      return this.selectedFileTypes.includes(fileType);
+    },
+
     indicateSearchBar() {
-      this.selectedFileTypes = this.fileTypes.slice();
       this.isBinaryFilesChecked = true;
       this.isIgnoredFilesChecked = true;
-      this.filterType = 'search';
     },
 
     indicateCheckBoxes() {
-      this.searchBarValue = '';
-      this.filterType = 'checkboxes';
       this.updateFileTypeHash();
+    },
+
+    resetFilter() {
+      this.resetSelectedFileTypes();
+      this.searchBarValue = '';
     },
 
     getHistoryLink(file) {
@@ -709,11 +712,16 @@ export default {
         vertical-align: middle;
       }
 
+      .mui-form--inline {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
       #search {
         @include medium-font;
         margin-top: 1.25rem;
         padding: .5rem 1.0rem .25rem 1.0rem;
-        width: 30%;
+        width: 80%;
       }
 
       #submit-button {
