@@ -76,12 +76,17 @@
                 'color': getFontColor(fileTypeColors[fileType])\
                 }"
             )
-              input.mui-checkbox--fileType(type="checkbox",
-                v-bind:id="fileType", v-bind:value="fileType",
-                v-on:change="indicateCheckBoxes", v-model="selectedFileTypes")
-              span(v-bind:title="getFileTypeBlankLineInfo(fileType)")
-                span {{ fileType }}&nbsp;{{ fileTypeLinesObj[fileType] }}&nbsp;
-                span ({{ fileTypeLinesObj[fileType] - fileTypeBlankLinesObj[fileType] }})&nbsp;
+              .tooltip
+                input.mui-checkbox--fileType(type="checkbox",
+                  v-bind:id="fileType", v-bind:value="fileType",
+                  v-on:change="indicateCheckBoxes", v-model="selectedFileTypes")
+                span(v-bind:title="getFileTypeBlankLineInfo(fileType)")
+                  span {{ fileType }}&nbsp;{{ fileTypeLinesObj[fileType] }}&nbsp;
+                  span ({{ fileTypeLinesObj[fileType] - fileTypeBlankLinesObj[fileType] }})&nbsp;
+                span.tooltip-text(v-if="isFileTypeSelected(fileType)")
+                  span Uncheck to exclude {{ fileType }} file(s)
+                span.tooltip-text(v-else)
+                  span Check to include {{ fileType }} file(s)
           br
           label.binary-fileType(v-if="binaryFilesCount > 0")
             input.mui-checkbox--fileType(type="checkbox", v-model="isBinaryChecked")
@@ -546,6 +551,10 @@ export default {
         this.isLoaded = true;
       }
       this.$store.commit('incrementLoadingOverlayCount', -1);
+    },
+
+    isFileTypeSelected(fileType) {
+      return this.selectedFileTypes.includes(fileType);
     },
 
     indicateSearchBar() {
