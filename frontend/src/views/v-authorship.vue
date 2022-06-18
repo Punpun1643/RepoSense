@@ -36,12 +36,11 @@
             option(v-bind:value='false') Ascending
           label order
       .searchbox
-        input.radio-button--search(
-          type="radio",
-          value="search",
-          v-model="filterType",
-          v-on:change="indicateSearchBar(); updateSearchBarValue();"
-        )
+        //- input.radio-button--search(
+        //-   type="radio",
+        //-   value="search",
+        //-   v-on:change="indicateSearchBar(); updateSearchBarValue();"
+        //- )
         .mui-form--inline
           input#search(
             type="search",
@@ -56,12 +55,11 @@
             v-on:click="indicateSearchBar(); updateSearchBarValue();"
           ) Filter
       .fileTypes
-        input.radio-button--checkbox(
-          type="radio",
-          value="checkboxes",
-          v-model="filterType",
-          v-on:change="indicateCheckBoxes"
-        )
+        //- input.radio-button--checkbox(
+        //-   type="radio",
+        //-   value="checkboxes",
+        //-   v-on:change="indicateCheckBoxes"
+        //- )
         .checkboxes.mui-form--inline(v-if="files.length > 0")
           label(style='background-color: #000000; color: #ffffff')
             input.mui-checkbox--fileType#all(type="checkbox", v-model="isSelectAllChecked")
@@ -169,7 +167,7 @@ function authorshipInitialState() {
     isLoaded: false,
     files: [],
     selectedFiles: [],
-    filterType: 'checkboxes',
+    // filterType: 'checkboxes',
     selectedFileTypes: [],
     fileTypes: [],
     filesLinesObj: {},
@@ -549,15 +547,15 @@ export default {
     },
 
     indicateSearchBar() {
-      this.selectedFileTypes = this.fileTypes.slice();
+      // this.selectedFileTypes = this.fileTypes.slice();
       this.isBinaryFilesChecked = true;
       this.isIgnoredFilesChecked = true;
-      this.filterType = 'search';
+      // this.filterType = 'search';
     },
 
     indicateCheckBoxes() {
-      this.searchBarValue = '';
-      this.filterType = 'checkboxes';
+      // this.searchBarValue = '';
+      // this.filterType = 'checkboxes';
       this.updateFileTypeHash();
     },
 
