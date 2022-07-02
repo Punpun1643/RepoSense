@@ -462,8 +462,7 @@ export default {
           out.segments = segmentInfo.segments;
           out.blankLineCount = segmentInfo.blankLineCount;
 
-          this.addBlankLineCount(file.fileType, segmentInfo.blankLineCount,
-              fileTypeBlanksInfoObj);
+          this.addBlankLineCount(file.fileType, segmentInfo.blankLineCount, fileTypeBlanksInfoObj);
         }
 
         res.push(out);
@@ -709,12 +708,17 @@ export default {
         margin: 0 2.0rem 0 0;
         vertical-align: middle;
       }
+      
+      .mui-form--inline {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
       #search {
         @include medium-font;
         margin-top: 1.25rem;
         padding: .5rem 1.0rem .25rem 1.0rem;
-        width: 30%;
+        width: 80%;
       }
 
       #submit-button {
